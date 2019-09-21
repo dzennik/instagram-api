@@ -1,13 +1,13 @@
 {
-  "name": "nicklasw/instagram-api",
+  "name": "dzennik/instagram-api",
   "license": "MIT",
   "authors": [
     {
-      "name": "Nicklas Wallgren",
-      "email": "nicklas.wallgren@gmail.com"
+      "name": "Denis Kulitsky",
+      "email": "d.kulitsky@gmail.com"
     }
   ],
-  "description": "Instagram private API SDK",
+  "description": "Instagram private API SDK fork of NicklasWallgren/instagram-api",
   "require": {
     "guzzlehttp/guzzle": "^6.2",
     "psr/http-message": "^1.0",
