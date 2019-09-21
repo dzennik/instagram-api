@@ -2,6 +2,7 @@
 
 namespace Instagram\SDK\Requests\Http\Builders;
 
+use Instagram\SDK\Http\RequestClient;
 use Instagram\SDK\Requests\Http\Traits\RequestBuilderBodyMethodsTrait;
 
 /**
@@ -11,6 +12,7 @@ use Instagram\SDK\Requests\Http\Traits\RequestBuilderBodyMethodsTrait;
  */
 abstract class AbstractPayloadRequestBuilder extends AbstractRequestBuilder
 {
+    protected $httpMethodType = RequestClient::METHOD_POST;
 
     use RequestBuilderBodyMethodsTrait;
 }

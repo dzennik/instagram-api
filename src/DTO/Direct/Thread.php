@@ -675,11 +675,13 @@ class Thread extends RequestIterator implements OnItemDecodeInterface
     {
         $result = [];
 
-        foreach ($this->lastSeenAt as $userId => $item) {
-            $result[$userId] = $item = new LastSeenAt($item->timestamp, $item->item_id);
-        }
+        if ($this->lastSeenAt) {
+            foreach ($this->lastSeenAt as $userId => $item) {
+                $result[$userId] = $item = new LastSeenAt($item->timestamp, $item->item_id);
+            }
 
-        $this->lastSeenAt = new LastSeenAtCollection($result);
+            $this->lastSeenAt = new LastSeenAtCollection($result);
+        }
     }
 
     /**

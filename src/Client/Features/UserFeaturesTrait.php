@@ -4,9 +4,12 @@ namespace Instagram\SDK\Client\Features;
 
 use Exception;
 use GuzzleHttp\Promise\PromiseInterface;
+use Instagram\SDK\DTO\Messages\User\InfoMessage;
 use Instagram\SDK\DTO\Messages\User\LogoutMessage;
 use Instagram\SDK\DTO\Messages\User\SessionMessage;
+use Instagram\SDK\Http\RequestClient;
 use Instagram\SDK\Instagram;
+use Instagram\SDK\Requests\GenericRequest;
 use Instagram\SDK\Requests\Http\Builders\GenericRequestBuilder;
 use Instagram\SDK\Requests\Support\SignatureSupport;
 use Instagram\SDK\Requests\User\LoginRequest;
@@ -138,4 +141,31 @@ trait UserFeaturesTrait
             $this->mode = $mode;
         }
     }
+
+    /**
+     * User info
+     *
+     * @param string      $userId
+     * @return FollowingMessage|Promise<FollowingMessage>
+     */
+    public function info()
+    {
+        return task(function (): Promise {
+
+            $uri = new GenericRequestBuilder(sprintf('users/%d/info/', $this->session->getUser()->getId()), $this->session);
+            $uri->setType(RequestClient::METHOD_GET);
+
+            /**
+             * @var GenericRequest $request
+             */
+            $request = request($uri, new InfoMessage())(
+                $this,
+                $this->session,
+                $this->client
+            );
+
+            return $request->fire();
+        })($this->getMode());
+    }
+
 }

@@ -31,7 +31,13 @@ trait RequestBuilderMethodsTrait
      */
     protected function getType(): string
     {
-        return RequestClient::METHOD_POST;
+        return $this->httpMethodType ?? RequestClient::METHOD_POST;
+    }
+
+
+    public function setType(string $type)
+    {
+        $this->httpMethodType = $type;
     }
 
     /**
